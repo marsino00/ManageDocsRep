@@ -5,18 +5,41 @@ import {styles} from './ListOptions.styles';
 interface ListOptionsProps {
   viewMode: 'list' | 'grid';
   setViewMode: (mode: 'list' | 'grid') => void;
+  sortBy: 'title' | 'version';
+  setSortBy: (option: 'title' | 'version') => void;
+  sortOrder: 'asc' | 'desc';
+  setSortOrder: (order: 'asc' | 'desc') => void;
 }
-const ListOptions = ({viewMode, setViewMode}: ListOptionsProps) => {
+
+const ListOptions = ({
+  viewMode,
+  setViewMode,
+  sortBy,
+  setSortBy,
+  sortOrder,
+  setSortOrder,
+}: ListOptionsProps) => {
+  const toggleSortOrder = () => {
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
+
+  const toggleSortProp = () => {
+    setSortBy(sortBy === 'title' ? 'version' : 'title');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <View style={styles.sortButton}>
+        <TouchableOpacity style={styles.sortButton} onPress={toggleSortProp}>
           <Icon name="sort" size={16} color="black" />
-          <Text>Sort by</Text>
-        </View>
-        <View style={styles.direction}>
-          <Icon name="caret-down" size={16} color="black" />
-        </View>
+          <Text>Sort by: {sortBy === 'title' ? 'Title' : 'Version'}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.sortButton} onPress={toggleSortOrder}>
+          <Icon
+            name={sortOrder === 'asc' ? 'caret-up' : 'caret-down'}
+            size={16}
+            color="black"
+          />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.right}>
