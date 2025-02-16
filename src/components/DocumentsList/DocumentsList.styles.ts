@@ -1,13 +1,15 @@
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  item: {
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
+  container: {
+    flex: 1,
+    gap: 5,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  cardContainer: {
+    flex: 1,
+    marginHorizontal: 10,
+  },
+  columnWrapper: {
+    marginBottom: 16,
   },
 });

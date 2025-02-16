@@ -5,6 +5,11 @@ export const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
