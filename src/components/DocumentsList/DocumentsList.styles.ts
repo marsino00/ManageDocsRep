@@ -9,6 +9,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 10,
   },
+  cardContainerGrid: {
+    maxWidth: '45%',
+  },
   columnWrapper: {
     marginBottom: 16,
   },

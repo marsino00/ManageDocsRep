@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, FlatList, Modal, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from './Header.styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import useNotifications, {
   Notification,
 } from '../../hooks/useNotifications/useNotifications';
 import {NotificationBadge} from '../NotificationBadge/NotificationBadge';
-import {NotificationItem} from '../NotificationItem/NotificationItem';
+import NotificationsModal from '../NotificationsModal/NotificationsModal';
 
 const Header = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -15,12 +15,6 @@ const Header = () => {
   useNotifications((batch: Notification[]) => {
     setNotifications(prev => [...prev, ...batch]);
   });
-
-  const modalNotifications = notifications.slice(-15);
-
-  const renderNotification = ({item}: {item: Notification}) => (
-    <NotificationItem notification={item} />
-  );
 
   return (
     <View style={styles.container}>
@@ -33,26 +27,11 @@ const Header = () => {
         <NotificationBadge count={notifications.length} />
       </TouchableOpacity>
 
-      <Modal visible={modalVisible} transparent animationType="slide">
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Notifications</Text>
-              <TouchableOpacity
-                style={styles.closeButton}
-                onPress={() => setModalVisible(false)}>
-                <Text style={styles.closeButtonText}>X</Text>
-              </TouchableOpacity>
-            </View>
-            <FlatList
-              data={modalNotifications}
-              keyExtractor={item => item.DocumentID}
-              renderItem={renderNotification}
-              contentContainerStyle={styles.flatListContainer}
-            />
-          </View>
-        </View>
-      </Modal>
+      <NotificationsModal
+        visible={modalVisible}
+        notifications={notifications}
+        onClose={() => setModalVisible(false)}
+      />
     </View>
   );
 };

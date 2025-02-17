@@ -20,18 +20,19 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'baseline',
     justifyContent: 'flex-start',
-    gap: 10,
+    gap: 5,
     marginBottom: 8,
   },
   headerGrid: {
     flexDirection: 'column',
-    justifyContent: 'center',
-    gap: 5,
+    minHeight: 60,
+  },
+  titleContainer: {
+    flex: 1,
   },
   title: {
     fontWeight: '600',
     fontSize: 16,
-    flex: 1,
   },
   version: {
     fontSize: 10,

@@ -39,10 +39,16 @@ const DocumentCard = ({doc, isGrid = false}: DocumentCardProps) => {
   return (
     <View style={[styles.card, isGrid && styles.cardGrid]}>
       <View style={[styles.header, isGrid && styles.headerGrid]}>
-        <TouchableOpacity onPress={onShare}>
-          <Icon name="share" color={'#007bff'} size={16} />
-        </TouchableOpacity>
-        <Text style={styles.title}>{doc.Title}</Text>
+        {!isGrid && (
+          <TouchableOpacity onPress={onShare}>
+            <Icon name="share" color={'#007bff'} size={16} />
+          </TouchableOpacity>
+        )}
+        <View style={styles.titleContainer}>
+          <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+            {doc.Title}
+          </Text>
+        </View>
 
         <Text style={styles.version}>Version {doc.Version}</Text>
       </View>

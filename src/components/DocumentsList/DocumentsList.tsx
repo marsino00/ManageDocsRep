@@ -53,7 +53,11 @@ const DocumentsList = () => {
         numColumns={numColumns}
         columnWrapperStyle={numColumns > 1 && styles.columnWrapper}
         renderItem={({item}) => (
-          <View style={styles.cardContainer}>
+          <View
+            style={[
+              styles.cardContainer,
+              viewMode === 'grid' && styles.cardContainerGrid,
+            ]}>
             <DocumentCard doc={item} isGrid={viewMode === 'grid'} />
           </View>
         )}
