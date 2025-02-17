@@ -1,97 +1,148 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Manage Documents App
 
-# Getting Started
+This repository contains a React Native application built as part of the React Native Developer Challenge. The application implements the following features:
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+### Required Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **Display the most recent documents:**  
+  Documents are shown in two different views:
+  - **List view:** Detailed view showing document title, version, contributors, attachments and a share button.
+  - **Grid view:** A compact view showing only the title and version.
+- **Real-time notifications:**  
+  The app receives notifications via WebSocket when new documents are created by other users. A badge displays the number of new notifications, and tapping the bell icon opens a modal with the latest notifications.
+- **Create a new document:**  
+  The application includes a modal for creating a new document (UI only).
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Optional Features
 
-```sh
-# Using npm
-npm start
+- **Offline support:**  
+  Documents fetched from the server are stored locally using AsyncStorage. When no internet connection is detected (using NetInfo), the app loads the stored documents.
+- **Pull-to-refresh:**  
+  The documents list supports pull-to-refresh to manually update the data.
+- **Share functionality:**  
+  Users can share document details using the native share API.
+- **Relative date formatting:**  
+  Dates are displayed in a relative format (e.g., "3 minutes ago") using a custom helper function (without external libraries).
 
-# OR using Yarn
-yarn start
+## Application Structure
+
+The project is structured to promote maintainability and scalability. Some key folders include:
+
+```
+/src
+  /components
+    /documents
+      /DocumentCard
+        - DocumentCard.tsx
+        - DocumentCard.styles.ts
+      /DocumentsList
+        - DocumentsList.tsx
+        - DocumentsList.styles.ts
+      /AddDocumentModal
+        - AddDocumentModal.tsx
+    /notifications
+      /NotificationBadge
+        - NotificationBadge.tsx
+      /NotificationItem
+        - NotificationItem.tsx
+      /NotificationsModal
+        - NotificationsModal.tsx
+    /layout
+      /Header
+        - Header.tsx
+      /Footer
+        - Footer.tsx
+  /hooks
+    - useDocuments.ts
+    - useNotifications.ts
+  /utils
+    - getRelativeTime.ts
 ```
 
-## Step 2: Build and run your app
+- **Components by Feature:**  
+  Components are organized by feature (Documents, Notifications) and further divided into their own folders with associated styles and tests.
+- **Hooks:**  
+  Custom hooks (`useDocuments` and `useNotifications`) encapsulate API integration, offline storage, and WebSocket connections.
+- **Utils:**  
+  Utility functions like `getRelativeTime` convert dates to a relative format.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## Third-Party Libraries
 
-### Android
+- **@react-native-async-storage/async-storage:**  
+  Used for storing documents locally to support offline mode.
+- **@react-native-community/netinfo:**  
+  Detects network connectivity to switch between online API calls and offline storage.
+- **@testing-library/react-native:**  
+  Used for UI and hook integration tests to ensure the correctness of the solution.
+- **react-native-config:**
+  This library is used to manage configuration variables in the application. It is used in the application for getting the API URL and Port from the .env file, making it easier to replace and more secure.
+- **react-native-vector-icons:**
+  Used for showing the different icons provided in mockups.
 
-```sh
-# Using npm
-npm run android
+### Alternatives Considered
 
-# OR using Yarn
-yarn android
+- **For relative time formatting:**  
+  Instead of using a custom function, libraries like `dayjs` or `moment` were considered. However, to minimize external dependencies and showcase custom code, a simple helper function was implemented.
+- **State Management:**  
+  Although state management libraries like Redux were considered, the challenge requirements allowed using React's built-in state and hooks for a more straightforward implementation.
+
+## Running the Application
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/marsino00/ManageDocsRep.git
+   cd ManageDocsApp
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Start the testing server:**  
+   The sample Go server is included. To run the server (requires Go installed):
+
+   ```bash
+   go run server.go
+   ```
+
+4. **Run the app on iOS or Android:**
+
+   For Android:
+
+   ```bash
+   npx react-native run-android
+   ```
+
+   For iOS:
+
+   ```bash
+   npx react-native run-ios
+   ```
+
+## Running Tests
+
+Tests are implemented using Jest and @testing-library/react-native. To run the tests:
+
+```bash
+npm test
+# or
+yarn test
 ```
 
-### iOS
+Tests cover:
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- **useDocuments hook:**
+  - Fetching documents when online, storing them offline.
+  - Loading documents from AsyncStorage when offline.
+  - Refresh functionality.
+- **useNotifications hook:**
+  - Accumulating notifications in batches and triggering callbacks periodically.
+- **getRelativeTime function:**
+  - This test file verifies that the getRelativeTime function returns the correct relative time string for different time differences.

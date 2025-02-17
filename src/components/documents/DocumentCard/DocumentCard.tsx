@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text, Share, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {styles} from './DocumentCard.styles';
-import getRelativeTime from '../../utils/getRelativeTime/getRelativeTime';
-import {Document} from '../../hooks/useDocuments/useDocuments';
+import getRelativeTime from '../../../utils/getRelativeTime/getRelativeTime';
+import {Document} from '../../../hooks/useDocuments/useDocuments';
 
 type DocumentCardProps = {
   doc: Document;

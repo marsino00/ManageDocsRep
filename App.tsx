@@ -1,9 +1,9 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 
-import Header from './src/components/Header/Header';
-import DocumentsList from './src/components/DocumentsList/DocumentsList';
-import Footer from './src/components/Footer/Footer';
+import Header from './src/components/layout/Header/Header';
+import DocumentsList from './src/components/documents/DocumentsList/DocumentsList';
+import Footer from './src/components/layout/Footer/Footer';
 
 function App(): React.JSX.Element {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, FlatList, Modal, TouchableOpacity} from 'react-native';
-import {Notification} from '../../hooks/useNotifications/useNotifications';
+import {Notification} from '../../../hooks/useNotifications/useNotifications';
 import {styles} from './NotificationsModal.styles';
 import {NotificationItem} from '../NotificationItem/NotificationItem';
 

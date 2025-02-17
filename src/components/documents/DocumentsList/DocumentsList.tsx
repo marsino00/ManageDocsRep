@@ -3,7 +3,7 @@ import {View, FlatList, RefreshControl} from 'react-native';
 import DocumentCard from '../DocumentCard/DocumentCard';
 import ListOptions from '../ListOptions/ListOptions';
 import {styles} from './DocumentsList.styles';
-import {Document, useDocuments} from '../../hooks/useDocuments/useDocuments';
+import {Document, useDocuments} from '../../../hooks/useDocuments/useDocuments';
 
 const DocumentsList = () => {
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
