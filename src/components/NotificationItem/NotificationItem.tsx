@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {Notification} from '../hooks/useNotifications';
 import {styles} from './NotificationItem.styles';
-import getRelativeTime from '../utils/getRelativeTime';
+import getRelativeTime from '../../utils/getRelativeTime';
+import {Notification} from '../../hooks/useNotifications';
 
 interface NotificationItemProps {
   notification: Notification;

@@ -4,7 +4,7 @@ import {styles} from './Header.styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import useNotifications, {Notification} from '../../hooks/useNotifications';
 import {NotificationBadge} from '../NotificationBadge/NotificationBadge';
-import {NotificationItem} from '../../NotificationItem/NotificationItem';
+import {NotificationItem} from '../NotificationItem/NotificationItem';
 
 const Header = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
