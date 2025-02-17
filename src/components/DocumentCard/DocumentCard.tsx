@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Share, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {styles} from './DocumentCard.styles';
+import getRelativeTime from '../../utils/getRelativeTime';
 
 export type Document = {
   ID: string;
@@ -19,9 +20,37 @@ type DocumentCardProps = {
 };
 
 const DocumentCard = ({doc, isGrid = false}: DocumentCardProps) => {
+  const onShare = async () => {
+    try {
+      const message = `Title: ${doc.Title}
+      Version: ${doc.Version}
+      Created: ${getRelativeTime(doc.CreatedAt)}
+      Updated: ${getRelativeTime(doc.UpdatedAt)}
+      Contributors: ${doc.Contributors.map(c => c.Name).join(', ')}
+      Attachments: ${doc.Attachments.join(', ')}`;
+      const result = await Share.share({
+        message: message,
+        title: doc.Title,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          console.log('Shared with activity type:', result.activityType);
+        } else {
+          console.log('Document shared successfully');
+        }
+      } else if (result.action === Share.dismissedAction) {
+        console.log('Share dismissed');
+      }
+    } catch (error) {
+      console.error('Error sharing document:', error);
+    }
+  };
   return (
     <View style={[styles.card, isGrid && styles.cardGrid]}>
       <View style={[styles.header, isGrid && styles.headerGrid]}>
+        <TouchableOpacity onPress={onShare}>
+          <Icon name="share" color={'#007bff'} size={16} />
+        </TouchableOpacity>
         <Text style={styles.title}>{doc.Title}</Text>
 
         <Text style={styles.version}>Version {doc.Version}</Text>
