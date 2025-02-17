@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import {View, Text, FlatList, Modal, TouchableOpacity} from 'react-native';
 import {styles} from './Header.styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import useNotifications, {Notification} from '../../hooks/useNotifications';
+import useNotifications, {
+  Notification,
+} from '../../hooks/useNotifications/useNotifications';
 import {NotificationBadge} from '../NotificationBadge/NotificationBadge';
 import {NotificationItem} from '../NotificationItem/NotificationItem';
 

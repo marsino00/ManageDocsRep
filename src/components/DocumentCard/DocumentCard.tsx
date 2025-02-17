@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Share, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {styles} from './DocumentCard.styles';
-import getRelativeTime from '../../utils/getRelativeTime';
+import getRelativeTime from '../../utils/getRelativeTime/getRelativeTime';
 
 export type Document = {
   ID: string;

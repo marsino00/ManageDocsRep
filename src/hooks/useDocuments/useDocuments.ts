@@ -18,7 +18,7 @@ export const useDocuments = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const API_URL = `${Config.API_HOST}:${Config.API_PORT}`;
-  const STORAGE_KEY = 'offlineDocuments'; // Clave para AsyncStorage
+  const STORAGE_KEY = 'offlineDocuments';
 
   const storeDocumentsOffline = async (docs: Document[]) => {
     try {
