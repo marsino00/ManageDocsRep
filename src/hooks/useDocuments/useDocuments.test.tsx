@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import {render, fireEvent, waitFor} from '@testing-library/react-native';
+import {render, fireEvent, waitFor, act} from '@testing-library/react-native';
 import {useDocuments, Document} from './useDocuments';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import NetInfo from '@react-native-community/netinfo';
@@ -20,20 +20,33 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 }));
 
 const TestDocumentsComponent = function (): React.ReactElement {
-  const {documents, refreshing, onRefresh} = useDocuments();
+  const {documents, onRefresh} = useDocuments();
   return React.createElement(
     React.Fragment,
     null,
     React.createElement(Text, {testID: 'docCount'}, String(documents.length)),
     React.createElement(
-      Text,
-      {testID: 'refreshing'},
-      refreshing ? 'true' : 'false',
-    ),
-    React.createElement(
       TouchableOpacity,
       {onPress: onRefresh, testID: 'refreshButton'},
       React.createElement(Text, null, 'Refresh'),
+    ),
+  );
+};
+
+const TestCreateDocumentComponent = function (): React.ReactElement {
+  const {documents, onCreate} = useDocuments();
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(Text, {testID: 'docCount'}, String(documents.length)),
+    React.createElement(
+      TouchableOpacity,
+      {
+        testID: 'createButton',
+        onPress: () =>
+          onCreate({name: 'New Document', version: '1.0', file: 'file.pdf'}),
+      },
+      React.createElement(Text, null, 'Create Document'),
     ),
   );
 };
@@ -144,5 +157,34 @@ describe('useDocuments hook', () => {
     await waitFor(() => {
       expect(getByTestId('docCount').props.children).toBe('1');
     });
+  });
+
+  it('onCreate adds a new document and stores it offline', async () => {
+    (NetInfo.fetch as jest.Mock).mockResolvedValue({isConnected: true});
+    (fetch as jest.Mock).mockResolvedValue({
+      json: jest.fn().mockResolvedValue([]),
+    });
+    const setItemSpy = jest.spyOn(AsyncStorage, 'setItem');
+
+    const {getByTestId} = render(
+      React.createElement(TestCreateDocumentComponent, null),
+    );
+
+    await waitFor(() => {
+      expect(getByTestId('docCount').props.children).toBe('0');
+    });
+
+    await act(async () => {
+      fireEvent.press(getByTestId('createButton'));
+    });
+
+    await waitFor(() => {
+      expect(getByTestId('docCount').props.children).toBe('1');
+    });
+
+    expect(setItemSpy).toHaveBeenCalledWith(
+      'offlineDocuments',
+      expect.stringContaining('"Title":"New Document"'),
+    );
   });
 });

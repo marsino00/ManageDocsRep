@@ -15,13 +15,17 @@ import {pick} from '@react-native-documents/picker';
 type AddDocumentModalProps = {
   visible: boolean;
   onClose: () => void;
-  onSubmit: (doc: {name: string; version: string; file: string}) => void;
+  onCreateDocument: (doc: {
+    name: string;
+    version: string;
+    file: string;
+  }) => void;
 };
 
 const AddDocumentModal = ({
   visible,
   onClose,
-  onSubmit,
+  onCreateDocument,
 }: AddDocumentModalProps) => {
   const [name, setName] = useState('');
   const [version, setVersion] = useState('');
@@ -67,7 +71,8 @@ const AddDocumentModal = ({
     if (!validate()) {
       return;
     }
-    onSubmit({name, version, file});
+    onCreateDocument({name, version, file});
+
     setName('');
     setVersion('');
     setFile('');

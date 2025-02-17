@@ -69,5 +69,23 @@ export const useDocuments = () => {
     setRefreshing(false);
   }, [fetchDocuments]);
 
-  return {documents, refreshing, onRefresh};
+  const onCreate = useCallback(
+    async (newDocData: {name: string; version: string; file: string}) => {
+      const newDoc: Document = {
+        ID: Date.now().toString(),
+        CreatedAt: new Date().toISOString(),
+        UpdatedAt: new Date().toISOString(),
+        Title: newDocData.name,
+        Attachments: [newDocData.file],
+        Contributors: [{ID: '1234', Name: 'Roger'}],
+        Version: newDocData.version,
+      };
+
+      const updatedDocuments = [newDoc, ...documents];
+      setDocuments(updatedDocuments);
+      await storeDocumentsOffline(updatedDocuments);
+    },
+    [documents],
+  );
+  return {documents, refreshing, onRefresh, onCreate};
 };

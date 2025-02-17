@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {View, Button} from 'react-native';
 import {styles} from './Footer.styles';
 import AddDocumentModal from '../../documents/AddDocumentModal/AddDocumentModal';
+import {useDocuments} from '../../../hooks/useDocuments/useDocuments';
 const Footer = () => {
   const [modalVisible, setModalVisible] = useState(false);
-
+  const {onCreate} = useDocuments();
   const handleOpenModal = () => {
     setModalVisible(true);
   };
@@ -15,21 +16,13 @@ const Footer = () => {
     setModalVisible(false);
   };
 
-  const handleSubmitDocument = (doc: {
-    name: string;
-    version: string;
-    file: string;
-  }) => {
-    console.log('Document submitted:', doc);
-  };
-
   return (
     <View style={styles.container}>
       <Button title="+ Add document" onPress={handleOpenModal} />
       <AddDocumentModal
         visible={modalVisible}
         onClose={handleCloseModal}
-        onSubmit={handleSubmitDocument}
+        onCreateDocument={onCreate}
       />
     </View>
   );
