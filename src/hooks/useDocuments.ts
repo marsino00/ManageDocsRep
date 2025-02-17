@@ -19,7 +19,8 @@ export const useDocuments = () => {
 
   const fetchDocuments = useCallback(async () => {
     try {
-      const response = await fetch(`${API_URL}/documents`);
+      const response = await fetch(`http://${API_URL}/documents`);
+
       const data = await response.json();
       setDocuments(data);
     } catch (error) {
