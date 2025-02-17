@@ -1,13 +1,14 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../../constants/colors';
 
 export const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: Colors.modalbg,
     justifyContent: 'flex-end',
   },
   modalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     borderTopStartRadius: 8,
     borderTopEndRadius: 8,
     padding: 16,
@@ -31,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: Colors.border,
     padding: 8,
     marginBottom: 8,
     borderRadius: 4,
@@ -39,22 +40,22 @@ export const styles = StyleSheet.create({
   fileSelected: {
     marginTop: 4,
     fontStyle: 'italic',
-    color: '#666',
+    color: Colors.textSecondary,
   },
   chooseButton: {
     flexDirection: 'row',
     gap: 10,
     width: 130,
     alignItems: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: Colors.background,
     borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: Colors.textPrimary,
     shadowOpacity: 0.1,
     shadowRadius: 1,
     elevation: 1,
     padding: 10,
   },
-  chooseFileText: {color: '#007bff'},
+  chooseFileText: {color: Colors.filledIcon},
   titleContainer: {flexDirection: 'row', justifyContent: 'space-between'},
-  submitContainer: {padding: 15, backgroundColor: '#f3f4f6'},
+  submitContainer: {padding: 15, backgroundColor: Colors.appBackground},
 });

@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import {styles} from './DocumentCard.styles';
 import getRelativeTime from '../../../utils/getRelativeTime/getRelativeTime';
 import {Document} from '../../../hooks/useDocuments/useDocuments';
+import Colors from '../../../constants/colors';
 
 type DocumentCardProps = {
   doc: Document;
@@ -41,7 +42,7 @@ const DocumentCard = ({doc, isGrid = false}: DocumentCardProps) => {
       <View style={[styles.header, isGrid && styles.headerGrid]}>
         {!isGrid && (
           <TouchableOpacity onPress={onShare}>
-            <Icon name="share" color={'#007bff'} size={16} />
+            <Icon name="share" color={Colors.filledIcon} size={16} />
           </TouchableOpacity>
         )}
         <View style={styles.titleContainer}>
@@ -57,7 +58,7 @@ const DocumentCard = ({doc, isGrid = false}: DocumentCardProps) => {
         <View style={styles.infoRow}>
           <View style={styles.column}>
             <View style={styles.section}>
-              <Icon name="users" color={'#666'} size={12} />
+              <Icon name="users" color={Colors.textSecondary} size={12} />
               <Text style={styles.sectionLabel}>Contributors</Text>
             </View>
             {doc.Contributors.map(contributor => (
@@ -69,7 +70,7 @@ const DocumentCard = ({doc, isGrid = false}: DocumentCardProps) => {
 
           <View style={styles.column}>
             <View style={styles.section}>
-              <Icon name="link" color={'#666'} size={12} />
+              <Icon name="link" color={Colors.textSecondary} size={12} />
               <Text style={styles.sectionLabel}>Attachments</Text>
             </View>
             {doc.Attachments.map((attachment, index) => (

@@ -4,6 +4,7 @@ import {SafeAreaView, StyleSheet} from 'react-native';
 import Header from './src/components/layout/Header/Header';
 import DocumentsList from './src/components/documents/DocumentsList/DocumentsList';
 import Footer from './src/components/layout/Footer/Footer';
+import Colors from './src/constants/colors';
 
 function App(): React.JSX.Element {
   return (
@@ -18,7 +19,7 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: Colors.appBackground,
     gap: 5,
   },
 });

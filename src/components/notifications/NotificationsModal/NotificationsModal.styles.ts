@@ -1,14 +1,15 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../../constants/colors';
 
 export const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: Colors.modalbg,
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
   modalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     borderRadius: 8,
     maxHeight: '80%',
     padding: 16,
@@ -27,7 +28,7 @@ export const styles = StyleSheet.create({
   },
   closeButtonText: {
     fontSize: 16,
-    color: '#007bff',
+    color: Colors.filledIcon,
   },
   flatListContainer: {
     paddingVertical: 8,

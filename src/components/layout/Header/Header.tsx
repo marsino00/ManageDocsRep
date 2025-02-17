@@ -7,6 +7,7 @@ import useNotifications, {
 } from '../../../hooks/useNotifications/useNotifications';
 import {NotificationBadge} from '../../notifications/NotificationBadge/NotificationBadge';
 import NotificationsModal from '../../notifications/NotificationsModal/NotificationsModal';
+import Colors from '../../../constants/colors';
 
 const Header = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -23,7 +24,7 @@ const Header = () => {
         disabled={notifications.length === 0 ? true : false}
         onPress={() => setModalVisible(true)}
         style={styles.iconContainer}>
-        <Icon name="bell-o" size={24} color="#000" />
+        <Icon name="bell-o" size={24} color={Colors.textSecondary} />
         <NotificationBadge count={notifications.length} />
       </TouchableOpacity>
 

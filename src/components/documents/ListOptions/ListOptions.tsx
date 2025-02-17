@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {styles} from './ListOptions.styles';
+import Colors from '../../../constants/colors';
 interface ListOptionsProps {
   viewMode: 'list' | 'grid';
   setViewMode: (mode: 'list' | 'grid') => void;
@@ -54,7 +55,9 @@ const ListOptions = ({
           <Icon
             name="th-list"
             size={14}
-            color={viewMode === 'list' ? '#007bff' : '#888'}
+            color={
+              viewMode === 'list' ? Colors.filledIcon : Colors.textSecondary
+            }
           />
         </TouchableOpacity>
         <TouchableOpacity
@@ -68,7 +71,9 @@ const ListOptions = ({
           <Icon
             name="th-large"
             size={14}
-            color={viewMode === 'grid' ? '#007bff' : '#888'}
+            color={
+              viewMode === 'grid' ? Colors.filledIcon : Colors.textSecondary
+            }
           />
         </TouchableOpacity>
       </View>

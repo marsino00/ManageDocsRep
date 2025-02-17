@@ -1,12 +1,13 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../../constants/colors';
 
 export const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFF',
+    backgroundColor: Colors.background,
     borderRadius: 8,
     padding: 20,
     marginBottom: 16,
-    shadowColor: '#000',
+    shadowColor: Colors.textPrimary,
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
@@ -36,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   version: {
     fontSize: 10,
-    color: '#666',
+    color: Colors.textSecondary,
   },
   infoRow: {
     flexDirection: 'row',
@@ -58,9 +59,6 @@ export const styles = StyleSheet.create({
     marginLeft: 4,
   },
   listItem: {
-    color: '#666',
-  },
-  icon: {
-    color: '#000',
+    color: Colors.textSecondary,
   },
 });

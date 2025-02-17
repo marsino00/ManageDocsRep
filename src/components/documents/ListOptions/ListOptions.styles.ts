@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../../constants/colors';
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,9 +10,9 @@ export const styles = StyleSheet.create({
   },
   left: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
+    backgroundColor: Colors.background,
     borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: Colors.textPrimary,
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
@@ -29,16 +30,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 10,
   },
-  modeButton: {},
+  modeButton: {paddingHorizontal: 20, paddingVertical: 10},
   modeButtonActive: {
-    backgroundColor: '#FFF',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    backgroundColor: Colors.background,
   },
   modeButtonInactive: {
-    backgroundColor: '#E1E2E6',
-
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    backgroundColor: Colors.inactive,
   },
 });

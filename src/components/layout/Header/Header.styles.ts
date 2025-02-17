@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
+import Colors from '../../../constants/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    backgroundColor: Colors.background,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -17,21 +18,21 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: Colors.background,
     borderRadius: 8,
-    shadowColor: '#000',
+    shadowColor: Colors.textPrimary,
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: Colors.modalbg,
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
   modalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     borderRadius: 8,
     maxHeight: '80%',
     padding: 16,
@@ -46,7 +47,7 @@ export const styles = StyleSheet.create({
   },
   closeButtonText: {
     fontSize: 18,
-    color: '#007bff',
+    color: Colors.filledIcon,
   },
   flatListContainer: {
     paddingVertical: 8,

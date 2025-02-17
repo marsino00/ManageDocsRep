@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {styles} from './AddDocumentModal.styles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import Colors from '../../../constants/colors';
 
 type AddDocumentModalProps = {
   visible: boolean;
@@ -74,7 +75,7 @@ const AddDocumentModal = ({
             <TouchableOpacity
               onPress={handleChooseFile}
               style={styles.chooseButton}>
-              <Icon name="file" color={'#007bff'} size={12} />
+              <Icon name="file" color={Colors.filledIcon} size={12} />
               <Text style={styles.chooseFileText}>Choose file</Text>
             </TouchableOpacity>
           </View>
