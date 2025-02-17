@@ -20,6 +20,10 @@ export const styles = StyleSheet.create({
   closeButtonText: {
     fontSize: 16,
   },
+  errorText: {
+    fontSize: 16,
+    color: Colors.error,
+  },
   title: {
     fontSize: 24,
     fontWeight: '600',
@@ -45,7 +49,6 @@ export const styles = StyleSheet.create({
   chooseButton: {
     flexDirection: 'row',
     gap: 10,
-    width: 130,
     alignItems: 'center',
     backgroundColor: Colors.background,
     borderRadius: 8,
@@ -54,8 +57,9 @@ export const styles = StyleSheet.create({
     shadowRadius: 1,
     elevation: 1,
     padding: 10,
+    alignSelf: 'flex-start',
   },
-  chooseFileText: {color: Colors.filledIcon},
+  chooseFileText: {color: Colors.filledIcon, flexShrink: 1},
   titleContainer: {flexDirection: 'row', justifyContent: 'space-between'},
   submitContainer: {padding: 15, backgroundColor: Colors.appBackground},
 });

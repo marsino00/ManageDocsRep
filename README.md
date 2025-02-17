@@ -80,6 +80,8 @@ The project is structured to promote maintainability and scalability. Some key f
   This library is used to manage configuration variables in the application. It is used in the application for getting the API URL and Port from the .env file, making it easier to replace and more secure.
 - **react-native-vector-icons:**
   Used for showing the different icons provided in mockups.
+- **@react-native-documents/picker**
+  This library provides a simple way to pick files from the device’s file system. It supports various file types and different picking modes (e.g., single or multiple files). In this project, it's used in the **AddDocumentModal** component to let the user select a file that will be associated with the new document.
 
 ### Alternatives Considered
 

@@ -10,6 +10,7 @@ import {
 import {styles} from './AddDocumentModal.styles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../../../constants/colors';
+import {pick} from '@react-native-documents/picker';
 
 type AddDocumentModalProps = {
   visible: boolean;
@@ -25,16 +26,52 @@ const AddDocumentModal = ({
   const [name, setName] = useState('');
   const [version, setVersion] = useState('');
   const [file, setFile] = useState('');
+  const [errors, setErrors] = useState<{
+    name?: string;
+    version?: string;
+    file?: string;
+  }>({});
+
+  const validate = () => {
+    const newErrors: {name?: string; version?: string; file?: string} = {};
+    if (!name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    if (!version.trim()) {
+      newErrors.version = 'Version is required';
+    }
+    if (!file.trim()) {
+      newErrors.file = 'File selection is required';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChooseFile = async () => {
-    console.log('choose File');
+    try {
+      const result = await pick({mode: 'open'});
+
+      if (result && result[0].name) {
+        setFile(result[0]?.name);
+      }
+    } catch (error: any) {
+      if (error.code === 'DOCUMENT_PICKER_CANCELED') {
+        console.log('User cancelled file picker');
+      } else {
+        console.error('Error picking file:', error);
+      }
+    }
   };
 
   const handleSubmit = () => {
+    if (!validate()) {
+      return;
+    }
     onSubmit({name, version, file});
     setName('');
     setVersion('');
     setFile('');
+    setErrors({});
     onClose();
   };
 
@@ -59,6 +96,7 @@ const AddDocumentModal = ({
               onChangeText={setName}
               style={styles.input}
             />
+            {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
           </View>
 
           <View>
@@ -69,6 +107,9 @@ const AddDocumentModal = ({
               onChangeText={setVersion}
               style={styles.input}
             />
+            {errors.version && (
+              <Text style={styles.errorText}>{errors.version}</Text>
+            )}
           </View>
           <View>
             <Text style={styles.subtitle}>File</Text>
@@ -76,8 +117,14 @@ const AddDocumentModal = ({
               onPress={handleChooseFile}
               style={styles.chooseButton}>
               <Icon name="file" color={Colors.filledIcon} size={12} />
-              <Text style={styles.chooseFileText}>Choose file</Text>
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={styles.chooseFileText}>
+                {file ? file : 'Choose file'}
+              </Text>
             </TouchableOpacity>
+            {errors.file && <Text style={styles.errorText}>{errors.file}</Text>}
           </View>
         </View>
         <View style={styles.submitContainer}>

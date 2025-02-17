@@ -8,6 +8,7 @@ const Colors = {
   filledIcon: '#007bff',
   border: '#ccc',
   inactive: '#E1E2E6',
+  error: '#FF0000',
 };
 
 export default Colors;
