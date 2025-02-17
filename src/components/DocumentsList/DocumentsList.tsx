@@ -1,5 +1,5 @@
-import React, {useMemo, useState} from 'react';
-import {View, FlatList} from 'react-native';
+import React, {useMemo, useState, useCallback} from 'react';
+import {View, FlatList, RefreshControl} from 'react-native';
 import {useDocuments, Document} from '../../hooks/useDocuments';
 import DocumentCard from '../DocumentCard/DocumentCard';
 import ListOptions from '../ListOptions/ListOptions';
@@ -9,8 +9,10 @@ const DocumentsList = () => {
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [sortBy, setSortBy] = useState<'title' | 'version'>('title');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const {documents} = useDocuments();
+  const {documents, onRefresh} = useDocuments();
+  const [refreshing, setRefreshing] = useState(false);
   const numColumns = viewMode === 'grid' ? 2 : 1;
+
   const sortedDocuments = useMemo(() => {
     return [...documents].sort((a, b) => {
       const aValue =
@@ -27,6 +29,13 @@ const DocumentsList = () => {
       return 0;
     });
   }, [documents, sortBy, sortOrder]);
+
+  const refreshDocuments = useCallback(async () => {
+    setRefreshing(true);
+    await onRefresh();
+    setRefreshing(false);
+  }, [onRefresh]);
+
   return (
     <View style={styles.container}>
       <ListOptions
@@ -48,6 +57,12 @@ const DocumentsList = () => {
             <DocumentCard doc={item} isGrid={viewMode === 'grid'} />
           </View>
         )}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={refreshDocuments}
+          />
+        }
       />
     </View>
   );
