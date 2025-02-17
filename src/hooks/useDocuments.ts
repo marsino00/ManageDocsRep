@@ -1,4 +1,6 @@
 import {useState, useCallback, useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import NetInfo from '@react-native-community/netinfo';
 import Config from 'react-native-config';
 
 export type Document = {
@@ -16,15 +18,44 @@ export const useDocuments = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const API_URL = `${Config.API_HOST}:${Config.API_PORT}`;
+  const STORAGE_KEY = 'offlineDocuments'; // Clave para AsyncStorage
+
+  const storeDocumentsOffline = async (docs: Document[]) => {
+    try {
+      const jsonValue = JSON.stringify(docs);
+      await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
+    } catch (error) {
+      console.error('Error storing offline documents:', error);
+    }
+  };
+
+  const loadDocumentsOffline = async (): Promise<Document[]> => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
+      return jsonValue != null ? JSON.parse(jsonValue) : [];
+    } catch (error) {
+      console.error('Error loading offline documents:', error);
+      return [];
+    }
+  };
 
   const fetchDocuments = useCallback(async () => {
     try {
-      const response = await fetch(`http://${API_URL}/documents`);
-
-      const data = await response.json();
-      setDocuments(data);
+      const netInfo = await NetInfo.fetch();
+      if (netInfo.isConnected) {
+        const response = await fetch(`http://${API_URL}/documents`);
+        const data = await response.json();
+        setDocuments(data);
+        storeDocumentsOffline(data);
+      } else {
+        console.warn('No internet connection. Loading offline documents...');
+        const offlineDocs = await loadDocumentsOffline();
+        setDocuments(offlineDocs);
+      }
     } catch (error) {
-      console.error('Error at getting documents:', error);
+      console.error('Error fetching documents:', error);
+      const offlineDocs = await loadDocumentsOffline();
+      setDocuments(offlineDocs);
     }
   }, [API_URL]);
 
