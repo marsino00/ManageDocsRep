@@ -3,16 +3,7 @@ import {View, Text, Share, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {styles} from './DocumentCard.styles';
 import getRelativeTime from '../../utils/getRelativeTime/getRelativeTime';
-
-export type Document = {
-  ID: string;
-  CreatedAt: string;
-  UpdatedAt: string;
-  Title: string;
-  Attachments: string[];
-  Contributors: {ID: string; Name: string}[];
-  Version: string;
-};
+import {Document} from '../../hooks/useDocuments/useDocuments';
 
 type DocumentCardProps = {
   doc: Document;
