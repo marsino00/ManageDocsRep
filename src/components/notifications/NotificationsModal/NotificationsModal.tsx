@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, FlatList, Modal, TouchableOpacity} from 'react-native';
 import {styles} from './NotificationsModal.styles';
 import {Notification} from 'hooks';
-import {NotificationItem} from '..';
+import {NotificationItem} from '../NotificationItem/NotificationItem';
 
 type NotificationsModalProps = {
   visible: boolean;
