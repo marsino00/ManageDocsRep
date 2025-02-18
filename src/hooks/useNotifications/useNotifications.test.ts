@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {render, act} from '@testing-library/react-native';
-import useNotifications, {Notification} from './useNotifications';
+import {Notification, useNotifications} from './useNotifications';
 
 jest.useFakeTimers();
 jest.mock('react-native-config', () => ({
