@@ -42,5 +42,3 @@ export const NotificationsModal = ({
     </Modal>
   );
 };
-
-// export default NotificationsModal;
