@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import {styles} from './AddDocumentModal.styles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Colors from '../../../constants/colors';
 import {pick} from '@react-native-documents/picker';
+import Colors from 'constants/colors';
 
 type AddDocumentModalProps = {
   visible: boolean;
@@ -22,7 +22,7 @@ type AddDocumentModalProps = {
   }) => void;
 };
 
-const AddDocumentModal = ({
+export const AddDocumentModal = ({
   visible,
   onClose,
   onCreateDocument,
@@ -139,5 +139,3 @@ const AddDocumentModal = ({
     </Modal>
   );
 };
-
-export default AddDocumentModal;

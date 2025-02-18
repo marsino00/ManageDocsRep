@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {View, Button} from 'react-native';
 import {styles} from './Footer.styles';
-import AddDocumentModal from '../../documents/AddDocumentModal/AddDocumentModal';
-import {useDocuments} from '../../../hooks/useDocuments/useDocuments';
+import {useDocuments} from 'hooks';
+import {AddDocumentModal} from 'components/documents';
 const Footer = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const {onCreate} = useDocuments();

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {styles} from './ListOptions.styles';
-import Colors from '../../../constants/colors';
+import Colors from 'constants/colors';
 interface ListOptionsProps {
   viewMode: 'list' | 'grid';
   setViewMode: (mode: 'list' | 'grid') => void;

@@ -2,12 +2,9 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from './Header.styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import useNotifications, {
-  Notification,
-} from '../../../hooks/useNotifications/useNotifications';
-import {NotificationBadge} from '../../notifications/NotificationBadge/NotificationBadge';
-import NotificationsModal from '../../notifications/NotificationsModal/NotificationsModal';
-import Colors from '../../../constants/colors';
+import {Notification, useNotifications} from 'hooks';
+import {NotificationBadge, NotificationsModal} from 'components/notifications';
+import Colors from 'constants/colors';
 
 const Header = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);

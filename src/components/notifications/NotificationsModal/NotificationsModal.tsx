@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, FlatList, Modal, TouchableOpacity} from 'react-native';
-import {Notification} from '../../../hooks/useNotifications/useNotifications';
 import {styles} from './NotificationsModal.styles';
-import {NotificationItem} from '../NotificationItem/NotificationItem';
+import {Notification} from 'hooks';
+import {NotificationItem} from '..';
 
 type NotificationsModalProps = {
   visible: boolean;
@@ -10,7 +10,7 @@ type NotificationsModalProps = {
   onClose: () => void;
 };
 
-const NotificationsModal = ({
+export const NotificationsModal = ({
   visible,
   notifications,
   onClose,
@@ -43,4 +43,4 @@ const NotificationsModal = ({
   );
 };
 
-export default NotificationsModal;
+// export default NotificationsModal;

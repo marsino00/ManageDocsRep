@@ -9,7 +9,7 @@ export type Notification = {
   DocumentTitle: string;
 };
 
-const useNotifications = (
+export const useNotifications = (
   onNotificationBatch: (notifications: Notification[]) => void,
 ) => {
   const batchRef = useRef<Notification[]>([]);
@@ -52,5 +52,3 @@ const useNotifications = (
     };
   }, [onNotificationBatch]);
 };
-
-export default useNotifications;
