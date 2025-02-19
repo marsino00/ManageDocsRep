@@ -12,6 +12,10 @@ type DocumentCardProps = {
 };
 
 const DocumentCard = ({doc, isGrid = false}: DocumentCardProps) => {
+  /*
+  Sharing functionality using native sharing option.
+  Creation of formatted message and triggering of share action.
+  */
   const onShare = async () => {
     try {
       const message = `Title: ${doc.Title}

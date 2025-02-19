@@ -51,6 +51,7 @@ export const AddDocumentModal = ({
     return Object.keys(newErrors).length === 0;
   };
 
+  // Handle file selection using the document picker.
   const handleChooseFile = async () => {
     try {
       const result = await pick({mode: 'open'});

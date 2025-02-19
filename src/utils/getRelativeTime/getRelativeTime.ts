@@ -1,3 +1,7 @@
+/*
+  This function converts a given date (as a string) to a relative time description (e.g., "5 seconds ago", "2 days ago").
+  It calculates the time difference between the provided date and the current moment, then formats the result based on the appropriate time unit.
+*/
 const getRelativeTime = (dateString: string): string => {
   const date = new Date(dateString);
   const now = new Date();

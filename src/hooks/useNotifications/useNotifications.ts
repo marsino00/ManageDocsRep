@@ -19,7 +19,7 @@ export const useNotifications = (
     const ws = new WebSocket(`ws://${API_URL}/notifications`);
 
     ws.onopen = () => {
-      console.log('Conectado al WebSocket de notificaciones');
+      console.log('Connected to the WebSocket for notifications');
     };
 
     ws.onmessage = e => {
@@ -27,18 +27,19 @@ export const useNotifications = (
         const notification: Notification = JSON.parse(e.data);
         batchRef.current.push(notification);
       } catch (error) {
-        console.error('Error al parsear la notificación:', error);
+        console.error('Error parsing notification:', error);
       }
     };
 
     ws.onerror = e => {
-      console.error('Error en WebSocket:', e.message);
+      console.error('WebSocket error:', e.message);
     };
 
     ws.onclose = e => {
-      console.log('WebSocket cerrado:', e.code, e.reason);
+      console.log('WebSocket closed:', e.code, e.reason);
     };
 
+    //Sends accumulated notifications in batches every 5 seconds and clears the ref.
     const intervalId = setInterval(() => {
       if (batchRef.current.length > 0) {
         onNotificationBatch([...batchRef.current]);
@@ -46,6 +47,7 @@ export const useNotifications = (
       }
     }, 5000);
 
+    //Clean ws connection and interval on unmount.
     return () => {
       ws.close();
       clearInterval(intervalId);

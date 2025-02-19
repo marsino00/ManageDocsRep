@@ -13,6 +13,10 @@ const DocumentsList = () => {
   const [refreshing, setRefreshing] = useState(false);
   const numColumns = viewMode === 'grid' ? 2 : 1;
 
+  /*
+  Returns a sorted copy of the documents array based on the selected sorting criteria.
+  The sorting can be done either by title or version, in ascending or descending order.
+*/
   const sortedDocuments = useMemo(() => {
     return [...documents].sort((a, b) => {
       const aValue =

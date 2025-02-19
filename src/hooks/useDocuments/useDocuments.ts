@@ -20,6 +20,7 @@ export const useDocuments = () => {
   const API_URL = `${Config.API_HOST}:${Config.API_PORT}`;
   const STORAGE_KEY = 'offlineDocuments';
 
+  //Stores the provided documents in AsyncStorage for offline access.
   const storeDocumentsOffline = async (docs: Document[]) => {
     try {
       const jsonValue = JSON.stringify(docs);
@@ -29,6 +30,7 @@ export const useDocuments = () => {
     }
   };
 
+  //Loads documents from AsyncStorage in case the user is offline.
   const loadDocumentsOffline = async (): Promise<Document[]> => {
     try {
       const jsonValue = await AsyncStorage.getItem(STORAGE_KEY);
@@ -39,6 +41,10 @@ export const useDocuments = () => {
     }
   };
 
+  /*
+    Fetches documents from the server if the user is online.
+    If not , loads them from AsyncStorage and update the state with the retrieved data.
+  */
   const fetchDocuments = useCallback(async () => {
     try {
       const netInfo = await NetInfo.fetch();
@@ -63,12 +69,14 @@ export const useDocuments = () => {
     fetchDocuments();
   }, [fetchDocuments]);
 
+  //Refreshes the document list when the user pulls to refresh.
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     await fetchDocuments();
     setRefreshing(false);
   }, [fetchDocuments]);
 
+  //Creates a new document and updates the state and AsyncStorage with the new data.
   const onCreate = useCallback(
     async (newDocData: {name: string; version: string; file: string}) => {
       const newDoc: Document = {
